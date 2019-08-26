@@ -21,7 +21,7 @@ export default {
   props: {
     daily_forecast: {
       type: Object,
-      default: null
+      default: () => ({})
     }
   },
   computed: {
@@ -33,14 +33,13 @@ export default {
     getDayOfWeek: function() {
       moment.locale("zh-CN");
       let dt = moment(this.daily_forecast.date, "YYYY-MM-DD");
-      const today = moment().endOf("day");
-      const tomorrow = moment()
-        .add(1, "day")
-        .endOf("day");
-
-      if (dt < today) return "今天";
-      if (dt < tomorrow) return "明天";
-      else {
+      let today = dt.isSame(new Date(), "day");
+      let tomor = dt.isSame(moment(new Date()).add(1, "days"), "day");
+      if (today) {
+        return "今天";
+      } else if (tomor) {
+        return "明天";
+      } else {
         return dt.format("dddd");
       }
     }

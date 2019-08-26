@@ -1,21 +1,21 @@
 <template>
   <div class="main">
     <div class="icon">
-      <img src="../assets/images/101.svg" />
+      <img :src="require(`../assets/images/${weather.code}.svg`)" />
     </div>
     <div class="detail">
       <div class="left">
-        <span class="temp-now">23˚</span>
+        <span class="temp-now">{{ weather.tempNow }}˚</span>
       </div>
       <div class="right">
-        <span class="text">中雨</span>
+        <span class="text">{{ weather.text }}</span>
         <div class="temp">
-          <span class="temp-hign">12˚</span>
-          <span class="temp-low">23˚</span>
+          <span class="temp-hign">{{ weather.hign }}˚</span>
+          <span class="temp-low">{{ weather.low }}˚</span>
         </div>
       </div>
     </div>
-    <span class="air-info">空气质量优</span>
+    <span class="air-info">空气质量 {{ weather.airinfo }}</span>
   </div>
 </template>
 
@@ -23,7 +23,7 @@
 export default {
   name: "CurrentWeather",
   props: {
-    info: {
+    weather: {
       type: Object,
       default: () => ({})
     }
@@ -37,7 +37,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 2rem 2.5rem;
+  padding: 4.2rem 2.5rem;
   .icon image {
     width: 8rem;
     height: 8rem;

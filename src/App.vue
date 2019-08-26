@@ -5,7 +5,10 @@
     </div>
     <div class="content">
       <div class="left">
-        <current-weather class="current"></current-weather>
+        <current-weather
+          class="current"
+          :weather="currentInfo"
+        ></current-weather>
         <div class="detail">
           <weather-detail
             v-for="item in weatherDetail"
@@ -52,16 +55,24 @@ export default {
   },
   data: function() {
     return {
+      currentInfo: {
+        code: "305",
+        text: "小雨",
+        hign: "31",
+        tempNow: "26",
+        low: "22",
+        airinfo: "良"
+      },
       weatherDetail: [
-        { iconName: "wind", label: "东南风", val: "1级" },
+        { iconName: "wind", label: "东北风", val: "2级" },
         { iconName: "humidity", label: "湿度", val: "20%" },
         { iconName: "small_sun", label: "UV", val: "弱" }
       ],
       airInfo: [
-        { label: "CO", val: "34/94", unit: "PPM" },
+        { label: "CO", val: "15/34", unit: "PPM" },
         { label: "CO2", val: "10/24", unit: "PPM" },
-        { label: "PM2.5", val: "17/98", unit: "PPM" },
-        { label: "PM10", val: "24/56", unit: "PPM" }
+        { label: "PM2.5", val: "17/48", unit: "PPM" },
+        { label: "PM10", val: "24/36", unit: "PPM" }
       ],
       daily_forecast: [
         {
@@ -185,7 +196,8 @@ export default {
         }
       ]
     };
-  }
+  },
+  methods: {}
 };
 </script>
 
@@ -221,9 +233,7 @@ export default {
       flex-grow: 3;
       display: flex;
       flex-direction: column;
-      .current {
-        flex: 1;
-      }
+
       .detail {
         display: flex;
         flex-direction: row;
@@ -232,27 +242,26 @@ export default {
         justify-content: space-between;
       }
     }
-  }
-  .right {
-    flex-grow: 5;
-    display: flex;
-    flex-direction: column;
-    .daily-forecast {
-      flex: 1;
+    .right {
+      flex-grow: 5;
       display: flex;
-      flex-direction: row;
-      padding: 2rem 2.5rem;
-      border-radius: 0.8rem;
-      background: linear-gradient(to right, #00000026, #00000019);
-    }
-    .air-detail {
-      display: flex;
-      margin-top: 2rem;
-      padding: 2rem 2.5rem;
-      border-radius: 0.8rem;
-      justify-content: space-around;
-      background: linear-gradient(to right, #00000026, #00000019);
-      align-items: center;
+      flex-direction: column;
+      .daily-forecast {
+        display: flex;
+        flex-direction: row;
+        padding: 2rem 2.5rem;
+        border-radius: 0.8rem;
+        background: linear-gradient(to right, #00000026, #00000019);
+      }
+      .air-detail {
+        display: flex;
+        margin-top: 2rem;
+        padding: 2rem 2.5rem;
+        border-radius: 0.8rem;
+        justify-content: space-around;
+        background: linear-gradient(to right, #00000026, #00000019);
+        align-items: center;
+      }
     }
   }
 }
